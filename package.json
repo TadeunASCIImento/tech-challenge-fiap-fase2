@@ -4,9 +4,9 @@
   "description": "Trabalho para conclusão de fase na Pós Graduação Desenvolvedor FullStack - FIAP",
   "main": "index.js",
   "scripts": {
-    "start": "node ./dist/server.js",
-    "dev": "nodemon ./dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
   },
   "repository": {
     "type": "git",
