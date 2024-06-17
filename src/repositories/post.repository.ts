@@ -1,59 +1,80 @@
 import { Post } from "../entities/post.entity";
+import { database } from "../lib/pg/db";
+
+interface PaginatedResult<T> {
+    data: T[];
+    currentPage: number;
+    totalPages: number;
+    totalRecords: number;
+}
 
 export class PostRepository {
     
-    async save(post: Post): Promise<Post> {
-        return post;
+    async save(post: Post): Promise<Post | undefined> {
+        const result = await database.clientInstance?.query<Post>(
+            `INSERT INTO posts (title, description) VALUES ($1, $2) RETURNING *`,
+            [ post.title,  post.description]
+        );
+        return result?.rows[0];
     }
     
-    async findById(id: number): Promise<Post> {
-        return {
-            id: 1,
-            title: "Desenvolvimento com NodeJS",
-            description: "Apis com express e typescript"
-        }
+    async findById(id: number): Promise<Post | undefined> {
+        const result = await database.clientInstance?.query<Post>(
+            `SELECT * FROM posts WHERE id = $1`,
+            [ id ]
+        );
+        return result?.rows[0];
     }
 
-    async findAll(): Promise<Post[]> {
-        return [
-            {
-                id: 1,
-                title: "Desenvolvimento com NodeJS",
-                description: "Apis com express e typescript"
-            },
-            {
-                id: 2,
-                title: "Tech Challenge Pós Tech FIAP",
-                description: "Entrega 30 de Julho 2024"
-            }
-        ]
+    async findAll(page: number, limit: number): Promise<PaginatedResult<Post> | undefined> {
+        if (limit <= 0 || page <= 0) {
+            throw new Error("Limit must be greater than 0 and page must be greater than 0");
+        }        
+        const offset = (page - 1) * limit;
+        try {
+            const result = await database.clientInstance?.query<Post>(
+                `SELECT * FROM posts LIMIT $1 OFFSET $2`,
+                [ limit, offset ]
+            );   
+            const countResult = await database.clientInstance?.query<{ count: number }>(
+                `SELECT COUNT(*) as count FROM posts`
+            );
+            const totalRecords = countResult?.rows[0]?.count ?? 0;
+            const totalPages = Math.ceil(totalRecords / limit);
+            
+            return {
+                data: result?.rows ?? [],
+                currentPage: page,
+                totalPages,
+                totalRecords
+            };
+    
+        } catch (error) {
+            console.error('Error executing findAll', error);
+        }
     }
 
     async delete(id: number) {
-        return id;       
+        await database.clientInstance?.query<Post>(
+            `DELETE FROM posts WHERE id = $1`,
+            [ id ]
+        );       
     }
 
-    async search(keywordToSearch: string): Promise<Post[]> {
-        return [
-            {
-                id: 1,
-                title: `Desenvolvimento com NodeJS `,
-                description: `Apis com ${ keywordToSearch } e typescript`
-            },
-            {
-                id: 2,
-                title: `Tech Challenge Pós Tech FIAP`,
-                description: "Entrega 30 de Julho 2024"
-            }
-        ] 
+    async search(keywordToSearch: string): Promise<Post[] | undefined> {
+        const formattedKeyword = `%${keywordToSearch}%`;
+        const result = await database.clientInstance?.query<Post>(
+            `SELECT * FROM posts WHERE title LIKE $1 OR description LIKE $1`,
+            [ formattedKeyword ]
+        );
+        return result?.rows;
     }
 
-    async update(id: number): Promise<Post> {
-        return {
-            id: 1,
-            title: "Desenvolvimento com NodeJS",
-            description: "Apis com express e typescript Atualizado"
-        }
+    async update(post: Post){
+        await database.clientInstance?.query<Post>(
+            `UPDATE posts SET title = $2, description = $3 WHERE id = $1`,
+            [ post.id , post.title, post.description ] 
+        );   
     }
 
 }
