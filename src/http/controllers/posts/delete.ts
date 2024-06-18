@@ -1,18 +1,13 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { PostRepository } from "../../../repositories/post.repository";
-import { DeletePostUseCase } from "../../../use-cases/delete-post";
+
+import { makeDeletePostUseCase } from "../../../use-cases/factory/make-delete-post-use-case";
 
 export async function deletePostById(request: Request, response: Response) {
     try {
         const deleteParamSchema = z.object({ id: z.coerce.number() });
-
         const { id } = deleteParamSchema.parse(request.params);
-    
-        const repository = new PostRepository();
-        const deletePostUseCase = new DeletePostUseCase(repository);
-        
-        await deletePostUseCase.handler(id);
+        await makeDeletePostUseCase().handler(id);
         response.status(200).send();
     } catch (error) {
         if (error instanceof z.ZodError) {
