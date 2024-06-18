@@ -1,9 +1,9 @@
 import { Post } from "../entities/post.entity";
-import { PostRepository } from "../repositories/post.repository";
+import { IPostRepository } from "../repositories/post.repository.interface";
 
 export class CreatePostUseCase {
     
-    constructor(private repository: PostRepository){}
+    constructor(private repository: IPostRepository){}
 
     handler(post: Post) {
         return this.repository.save(post);

@@ -1,8 +1,8 @@
-import { PostRepository } from "../repositories/post.repository";
+import { IPostRepository } from "../repositories/post.repository.interface";
 
-export class FindPostByIdUseCase {
+export class FindPostUseCase {
 
-    constructor(private repository: PostRepository){}
+    constructor(private repository: IPostRepository){}
 
     handler(id: number){
         return this.repository.findById(id);

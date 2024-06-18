@@ -1,8 +1,8 @@
-import { PostRepository } from "../repositories/post.repository";
+import { IPostRepository } from "../repositories/post.repository.interface";
 
 export class FindAllPostUseCase {
 
-    constructor(private repository: PostRepository){}
+    constructor(private repository: IPostRepository){}
 
     handler(page: number, limit: number){
         return this.repository.findAll(page, limit);
