@@ -1,22 +1,23 @@
 import express from "express";
 
-import { createPost } from "../http/controllers/posts/create";
-import { findAllPosts } from "../http/controllers/posts/list";
-import { findPostById } from "../http/controllers/posts/find";
-import { deletePostById } from "../http/controllers/posts/delete";
-import { searchPostByKeyword } from "../http/controllers/posts/search";
-import { updatePostById } from "../http/controllers/posts/update";
-
+import { 
+createPost,
+findAllPosts,
+findPostById,
+deletePostById,
+searchPostByKeyword,
+updatePostById  
+} from "../controllers/post.controller";
 
 const router = express.Router();
 
-router.post('/posts', createPost)
-router.get('/posts/admin', findAllPosts)
-router.get('/posts', findAllPosts)
-router.get('/posts/search', searchPostByKeyword)
-router.get('/posts/:id', findPostById)
-router.put('/posts/:id', updatePostById)
-router.delete('/posts/:id', deletePostById)
+router.post('/api/posts', createPost)
+router.get('/api/posts/admin', findAllPosts)
+router.get('/api/posts', findAllPosts)
+router.get('/api/posts/search', searchPostByKeyword)
+router.get('/api/posts/:id', findPostById)
+router.put('/api/posts/:id', updatePostById)
+router.delete('/api/posts/:id', deletePostById)
 
 export default router;
 

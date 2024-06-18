@@ -9,7 +9,7 @@ interface PaginatedResult<T> {
     totalRecords: number;
 }
 
-export class PostRepository  implements IPostRepository{
+export class PostRepository implements IPostRepository{
     
     async save({ title, description }: IPost): Promise<IPost | undefined> {
         const result = await database.clientInstance?.query<IPost>(
