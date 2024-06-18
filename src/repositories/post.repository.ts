@@ -1,5 +1,6 @@
 import { Post } from "../entities/post.entity";
 import { database } from "../lib/pg/db";
+import { IPostRepository } from "./post.repository.interface";
 
 interface PaginatedResult<T> {
     data: T[];
@@ -8,7 +9,7 @@ interface PaginatedResult<T> {
     totalRecords: number;
 }
 
-export class PostRepository {
+export class PostRepository  implements IPostRepository{
     
     async save(post: Post): Promise<Post | undefined> {
         const result = await database.clientInstance?.query<Post>(
