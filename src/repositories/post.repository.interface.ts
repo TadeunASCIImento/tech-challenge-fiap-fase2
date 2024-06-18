@@ -1,19 +1,19 @@
-import { Post } from "../entities/post.entity";
+import { IPost } from "../entities/interfaces/post.interface";
+import { PaginatedResult } from "../entities/interfaces/pagination.interface";
 
-interface PaginatedResult<T> {
-    data: T[];
-    currentPage: number;
-    totalPages: number;
-    totalRecords: number;
-}
 
 export interface IPostRepository {
     
-    save(post: Post): Promise<Post | undefined>;
-    findById(id: number): Promise<Post | undefined>;
-    findAll(page: number, limit: number): Promise<PaginatedResult<Post> | undefined>;
+    save(post: IPost): Promise<IPost | undefined>;
+    
+    findById(id: number): Promise<IPost | undefined>;
+    
+    findAll(page: number, limit: number): Promise<PaginatedResult<IPost> | undefined>;
+    
     delete(id: number): void;
-    search(keywordToSearch: string): Promise<Post[] | undefined>
-    update(post: Post): void;
+    
+    search(keywordToSearch: string): Promise<IPost[] | undefined>
+    
+    update(post: IPost): void;
 
 }

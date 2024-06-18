@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 
-import { Post } from "../../../entities/post.entity";
 import { makeCreatePostUseCase } from "../../../use-cases/factory/make-create-post-use-case";
 
 export async function createPost(request: Request, response: Response) {
@@ -10,9 +9,10 @@ export async function createPost(request: Request, response: Response) {
             title: z.string(),
             description: z.string()
         });
+
         const { title, description } = registerBodySchema.parse(request.body);
-        const toSave = new Post(title, description);
-        await makeCreatePostUseCase().handler(toSave);
+        
+        await makeCreatePostUseCase().handler({ title, description });
         response.status(201).send();
     } catch (error) {
         if (error instanceof z.ZodError) {
