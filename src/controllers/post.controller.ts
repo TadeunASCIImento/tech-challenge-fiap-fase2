@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { Request, Response } from "express";
 
-import { makeCreatePostUseCase } from "../use-cases/factory/make-create-post-use-case";
-import { makeDeletePostUseCase } from "../use-cases/factory/make-delete-post-use-case";
-import { makeFindPostUseCase } from "../use-cases/factory/make-find-post-use-case";
-import { makeFindAllPostUseCase } from "../use-cases/factory/make-list-posts-use-case";
-import { makeSearchPostUseCase } from "../use-cases/factory/make-search-post-use-case";
-import { makeUpdatePostUseCase } from "../use-cases/factory/make-update-post-use-case";
+import { makeCreatePostUseCase } from "../use-cases/factories/create.factory";
+import { makeDeletePostUseCase } from "../use-cases/factories/delete.factory";
+import { makeFindPostUseCase } from "../use-cases/factories/find.factory";
+import { makeFindAllPostUseCase } from "../use-cases/factories/list.factory";
+import { makeSearchPostUseCase } from "../use-cases/factories/search.factory";
+import { makeUpdatePostUseCase } from "../use-cases/factories/update.factory";
 
 
 export async function createPost(request: Request, response: Response) {
