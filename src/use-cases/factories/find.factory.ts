@@ -1,4 +1,4 @@
-import { PostRepository } from "../../repositories/post.repository";
+import { PostRepository } from '../../lib/typeorm/post.repository';
 import { FindPostUseCase } from "../find-post";
 
 export function makeFindPostUseCase() {
