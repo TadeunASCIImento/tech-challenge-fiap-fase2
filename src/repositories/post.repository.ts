@@ -1,13 +1,8 @@
+import { PaginatedResult } from "../entities/interfaces/pagination.interface";
 import { IPost } from "../entities/interfaces/post.interface";
 import { database } from "../lib/pg/db";
 import { IPostRepository } from "./post.repository.interface";
 
-interface PaginatedResult<T> {
-    data: T[];
-    currentPage: number;
-    totalPages: number;
-    totalRecords: number;
-}
 
 export class PostRepository implements IPostRepository{
     
