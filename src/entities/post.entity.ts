@@ -1,12 +1,26 @@
-export class Post {
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { IPost } from "./interfaces/post.interface";
 
-    id?: number;
+@Entity({
+    name:'posts'
+})
+export class Post implements IPost{
+
+    @PrimaryGeneratedColumn({
+        name: 'id'
+    })
+    id?: number | undefined;
+
+    @Column({
+        name: 'title',
+        type: 'varchar'
+    })
     title: string;
-    description: string;
 
-    constructor(title: string, description: string){
-        this.title = title;
-        this.description = description;
-    }
+    @Column({
+        name: 'description',
+        type: 'varchar'
+    })
+    description: string;
 
 }
