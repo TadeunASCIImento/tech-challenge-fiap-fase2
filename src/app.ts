@@ -1,3 +1,6 @@
+import 'reflect-metadata';
+import './lib/orm/typeorm'
+
 import express from "express";
 import bodyParser from 'body-parser';
 
