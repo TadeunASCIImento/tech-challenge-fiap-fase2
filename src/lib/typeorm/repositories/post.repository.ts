@@ -1,11 +1,11 @@
 import { FindOneOptions, Repository } from "typeorm";
-import { appDataSource } from "../orm/typeorm";
+import { appDataSource } from "../../orm/typeorm";
 import { ILike } from "typeorm";
 
-import { PaginatedResult } from "../../entities/interfaces/pagination.interface";
-import { IPostRepository } from "../../repositories/post.repository.interface";
-import { IPost } from "../../entities/interfaces/post.interface";
-import { Post } from "../../entities/post.entity";
+import { PaginatedResult } from "../../../entities/interfaces/pagination.interface";
+import { IPostRepository } from "../../../repositories/post.repository.interface";
+import { IPost } from "../../../entities/interfaces/post.interface";
+import { Post } from "../../../entities/post.entity";
 
 export class PostRepository implements IPostRepository {
     private repository: Repository<Post>
