@@ -6,11 +6,11 @@ export interface IPostRepository {
     
     save(post: IPost): Promise<IPost | undefined>;
     
-    findById(id: number): Promise<IPost | undefined | null>;
+    findById(id: string): Promise<IPost | undefined | null>;
     
     findAll(page: number, limit: number): Promise<PaginatedResult<IPost> | undefined>;
     
-    delete(id: number): void;
+    delete(id: string): void;
     
     search(keywordToSearch: string): Promise<IPost[] | undefined>
     

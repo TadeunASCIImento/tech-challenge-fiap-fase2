@@ -26,7 +26,7 @@ export async function createPost(request: Request, response: Response) {
 export async function deletePostById(request: Request, response: Response) {
     try {
         const deleteParamSchema = z.object({ 
-            id: z.coerce.number() 
+            id: z.string() 
         });
         
         const { id } = deleteParamSchema.parse(request.params);
@@ -45,7 +45,7 @@ export async function deletePostById(request: Request, response: Response) {
 export async function findPostById(request: Request, response: Response) {
     try {
         const findParamSchema = z.object({ 
-            id: z.coerce.number() 
+            id: z.string() 
         });
 
         const { id } = findParamSchema.parse(request.params);
@@ -100,7 +100,7 @@ export async function searchPostByKeyword(request: Request, response: Response) 
 export async function updatePostById(request: Request, response: Response) {
     try {
         const paramsSchema = z.object({ 
-            id: z.coerce.number() 
+            id: z.string() 
         });
         
         const bodySchema = z.object({ 
