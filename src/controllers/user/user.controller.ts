@@ -18,8 +18,8 @@ export async function createUser(request: Request, response: Response) {
         
         const userHashedPassword = {username, password: hashedPassword };
 
-        makeUserUseCaseHandler().createHandler(userHashedPassword);
-        response.status(201).send();
+        const user = await makeUserUseCaseHandler().createHandler(userHashedPassword);
+        response.status(201).send({ id: user?.id, username: user?.username });
     } catch (error) {
         if (error instanceof z.ZodError) {
             response.status(400).json({ errors: error.errors });

@@ -5,7 +5,7 @@ export class UserUseCaseHandler {
 
     constructor(private repository: IUserRepository){}
 
-    async createHandler(user: IUser) {
+    async createHandler(user: IUser): Promise<IUser | undefined> {
         return this.repository.save(user)
 
     }
