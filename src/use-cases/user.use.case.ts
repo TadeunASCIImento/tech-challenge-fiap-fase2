@@ -9,4 +9,8 @@ export class UserUseCaseHandler {
         return this.repository.save(user)
 
     }
+
+    async findHandler(id: string): Promise<IUser | undefined| null> {
+        return await this.repository.find(id);
+    }
 }

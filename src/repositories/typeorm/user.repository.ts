@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { FindOneOptions, Repository } from "typeorm";
 import { IUser } from "../../entities/interfaces/user.interface";
 import { IUserRepository } from "../interfaces/user.repository.interface";
 import { User } from "../../entities/user.entity";
@@ -13,6 +13,13 @@ export class UserRepository implements IUserRepository {
 
     async save(user: IUser): Promise<IUser | undefined> {
         return await this.repository.save(user);
+    }
+
+    async find(id: string): Promise<IUser | undefined | null>{
+        const options: FindOneOptions<IUser> = {
+            where: { id: id }
+        }
+        return await this.repository.findOne(options);
     }
 
 }
