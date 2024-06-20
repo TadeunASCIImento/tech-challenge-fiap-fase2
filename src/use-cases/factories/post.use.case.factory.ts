@@ -1,4 +1,4 @@
-import { PostRepository } from "../../lib/typeorm/repositories/post.repository";
+import { PostRepository } from "../../repositories/typeorm/post.repository";
 import { PostUseCaseHandlers } from "../post.use.case";
 
 
