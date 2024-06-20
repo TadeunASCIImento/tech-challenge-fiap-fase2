@@ -7,7 +7,7 @@ findPostById,
 deletePostById,
 searchPostByKeyword,
 updatePostById  
-} from "../controllers/post.controller";
+} from "../controllers/post/post.controller";
 
 const router = express.Router();
 
