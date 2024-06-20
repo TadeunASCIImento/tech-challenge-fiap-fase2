@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "./interfaces/user.interface";
 
 @Entity({
-    name:'user'
+    name:'users'
 })
 export class User implements IUser {
 

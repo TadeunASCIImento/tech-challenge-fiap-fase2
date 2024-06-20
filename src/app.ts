@@ -4,11 +4,13 @@ import './lib/orm/typeorm'
 import express from "express";
 import bodyParser from 'body-parser';
 
-import postsRouter from "./routes/post.routes";
+import postRouter from "./routes/post.routes";
+import userRouter from "./routes/user.routes";
 
 export const app = express();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true}));
 
-app.use(postsRouter);
+app.use(userRouter);
+app.use(postRouter);
