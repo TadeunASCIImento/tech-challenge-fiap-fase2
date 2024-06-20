@@ -9,11 +9,11 @@ export class PostUseCaseHandlers {
         return this.repository.save(post);
     }
 
-    async deleteHandler(id: number){
+    async deleteHandler(id: string){
         return this.repository.delete(id);
     }
 
-    async findHandler(id: number){
+    async findHandler(id: string){
         return this.repository.findById(id);
     }
 
