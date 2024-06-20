@@ -1,5 +1,5 @@
-import { IPost } from "../entities/interfaces/post.interface";
-import { PaginatedResult } from "../entities/interfaces/pagination.interface";
+import { IPost } from "../../entities/interfaces/post.interface";
+import { PaginatedResult } from "../../entities/interfaces/pagination.interface";
 
 
 export interface IPostRepository {
