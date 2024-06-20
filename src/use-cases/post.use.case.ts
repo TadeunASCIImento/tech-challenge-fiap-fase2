@@ -1,5 +1,5 @@
 import { IPost } from "../entities/interfaces/post.interface";
-import { IPostRepository } from "../repositories/post.repository.interface";
+import { IPostRepository } from "../repositories/interfaces/post.repository.interface";
 
 export class PostUseCaseHandlers {
     
