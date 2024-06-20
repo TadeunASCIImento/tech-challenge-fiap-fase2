@@ -2,14 +2,14 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IPost } from "./interfaces/post.interface";
 
 @Entity({
-    name:'posts'
+    name:'post'
 })
 export class Post implements IPost{
 
-    @PrimaryGeneratedColumn({
+    @PrimaryGeneratedColumn('uuid',{
         name: 'id'
     })
-    id?: number | undefined;
+    id?: string | undefined;
 
     @Column({
         name: 'title',
