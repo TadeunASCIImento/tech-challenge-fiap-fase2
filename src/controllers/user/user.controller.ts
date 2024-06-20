@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import { z } from 'zod';
+import bcrypt from 'bcryptjs';
+
 import { makeUserUseCaseHandler } from "../../use-cases/factories/user.use.case.factory";
+
 
 export async function createUser(request: Request, response: Response) {
     try {
@@ -10,7 +13,12 @@ export async function createUser(request: Request, response: Response) {
         });
     
         const { username, password } = bodySchema.parse(request.body);
-        makeUserUseCaseHandler().createHandler({ username, password });
+
+        const hashedPassword = await bcrypt.hash(password, 8);
+        
+        const userHashedPassword = {username, password: hashedPassword };
+
+        makeUserUseCaseHandler().createHandler(userHashedPassword);
         response.status(201).send();
     } catch (error) {
         if (error instanceof z.ZodError) {

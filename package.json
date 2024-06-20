@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/TadeunASCIImento/tech-challenge-fiap-fase2#readme",
   "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
     "@types/express": "4.17.21",
     "@types/node": "20.14.2",
     "@types/pg": "8.11.6",
