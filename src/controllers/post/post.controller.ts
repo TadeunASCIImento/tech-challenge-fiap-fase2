@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Request, Response } from "express";
-import { makePostUseCaseHandler } from "../../use-cases/factories/post.use.case.factory";
+import { makePostUseCase } from "../../use-cases/factories/post.use.case.factory";
 
 
 export async function createPost(request: Request, response: Response) {
@@ -12,7 +12,7 @@ export async function createPost(request: Request, response: Response) {
 
         const { title, description } = registerBodySchema.parse(request.body);
         
-        await makePostUseCaseHandler().createHandler({ title, description });
+        await makePostUseCase().handlerCreate({ title, description });
         response.status(201).send();
     } catch (error) {
         if (error instanceof z.ZodError) {
@@ -31,7 +31,7 @@ export async function deletePostById(request: Request, response: Response) {
         
         const { id } = deleteParamSchema.parse(request.params);
         
-        await makePostUseCaseHandler().deleteHandler(id);
+        await makePostUseCase().handlerDelete(id);
         response.status(200).send();
     } catch (error) {
         if (error instanceof z.ZodError) {
@@ -50,7 +50,7 @@ export async function findPostById(request: Request, response: Response) {
 
         const { id } = findParamSchema.parse(request.params);
 
-        const post = await makePostUseCaseHandler().findHandler(id);
+        const post = await makePostUseCase().handlerFind(id);
         !post ? response.status(203).json('Post not found') : {};
         response.status(200).json(post);
     } catch (error) {
@@ -71,7 +71,7 @@ export async function findAllPosts(request: Request, response: Response) {
         
         const { page, limit } = paramsSchema.parse(request.query);
 
-        const allPosts = await makePostUseCaseHandler().findAllHandler(page, limit);
+        const allPosts = await makePostUseCase().handlerFindAll(page, limit);
         response.status(200).json(allPosts);
     } catch (error) {
         response.status(500).json({error: "Internal Server error"});
@@ -86,7 +86,7 @@ export async function searchPostByKeyword(request: Request, response: Response) 
         
         const { keyword } = querySchema.parse(request.query);
         
-        const post = await makePostUseCaseHandler().searchHandler(keyword);
+        const post = await makePostUseCase().handlerSearch(keyword);
         response.status(200).json(post);
     } catch (error) {
         if (error instanceof z.ZodError) {
@@ -111,7 +111,7 @@ export async function updatePostById(request: Request, response: Response) {
         const { id } = paramsSchema.parse(request.params);
         const { title, description } = bodySchema.parse(request.body);
         
-        makePostUseCaseHandler().updateHandler({id, title, description});
+        makePostUseCase().handlerUpdate({id, title, description});
         response.status(200).send();
     } catch (error) {
         if (error instanceof z.ZodError) {

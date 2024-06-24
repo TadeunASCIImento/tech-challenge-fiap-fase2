@@ -1,7 +1,7 @@
 import { UserRepository } from "../../repositories/typeorm/user.repository";
 import { UserUseCaseHandler } from "../user.use.case";
 
-export function makeUserUseCaseHandler(){
+export function makeUserUseCase(){
     const repository = new UserRepository();
     const userUseCaseHandler = new UserUseCaseHandler(repository);
 

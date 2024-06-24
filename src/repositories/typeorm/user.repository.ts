@@ -15,9 +15,9 @@ export class UserRepository implements IUserRepository {
         return await this.repository.save(user);
     }
 
-    async find(id: string): Promise<IUser | undefined | null>{
+    async find(username: string): Promise<IUser | undefined | null>{
         const options: FindOneOptions<IUser> = {
-            where: { id: id }
+            where: { username: username }
         }
         return await this.repository.findOne(options);
     }

@@ -5,27 +5,27 @@ export class PostUseCaseHandlers {
     
     constructor(private repository: IPostRepository){}
 
-    async createHandler(post: IPost) {
+    async handlerCreate(post: IPost) {
         return this.repository.save(post);
     }
 
-    async deleteHandler(id: string){
+    async handlerDelete(id: string){
         return this.repository.delete(id);
     }
 
-    async findHandler(id: string){
+    async handlerFind(id: string){
         return this.repository.findById(id);
     }
 
-    async findAllHandler(page: number, limit: number){
+    async handlerFindAll(page: number, limit: number){
         return this.repository.findAll(page, limit);
     }
 
-    async searchHandler(keywordToSearch: string){
+    async handlerSearch(keywordToSearch: string){
         return this.repository.search(keywordToSearch);
     }
 
-    async updateHandler(post: IPost){
+    async handlerUpdate(post: IPost){
         return this.repository.update(post);
     }
 }
