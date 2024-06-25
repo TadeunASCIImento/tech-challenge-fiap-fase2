@@ -1,5 +1,5 @@
 import { FindOneOptions, Repository } from "typeorm";
-import { appDataSource } from "../../lib/orm/orm.config";
+import { appDataSource } from "../../lib/orm/typeorm.config";
 import { ILike } from "typeorm";
 
 import { PaginatedResult } from "../../entities/interfaces/pagination.interface";

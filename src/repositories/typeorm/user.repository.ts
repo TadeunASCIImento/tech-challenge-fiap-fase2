@@ -2,7 +2,7 @@ import { FindOneOptions, Repository } from "typeorm";
 import { IUser } from "../../entities/interfaces/user.interface";
 import { IUserRepository } from "../interfaces/user.repository.interface";
 import { User } from "../../entities/user.entity";
-import { appDataSource } from "../../lib/orm/orm.config";
+import { appDataSource } from "../../lib/orm/typeorm.config";
 
 export class UserRepository implements IUserRepository {
     private repository: Repository<User>;
