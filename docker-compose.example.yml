@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    environment:
+      DATABASE_HOST: 
+      DATABASE_NAME: 
+      DATABASE_USER: 
+      DATABASE_PORT: 
+      DATABASE_PASSWORD: 
+      JWT_SECRET: 
+    ports:
+      [""]
+          
