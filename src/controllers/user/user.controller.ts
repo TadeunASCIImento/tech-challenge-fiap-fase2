@@ -11,17 +11,18 @@ export async function createUser(request: Request, response: Response) {
     try {
         const bodySchema = z.object({
             username: z.string(),
-            password: z.string()
+            password: z.string(),
+            profileId: z.number()
         });
 
-        const { username, password } = bodySchema.parse(request.body);
+        const { username, password, profileId } = bodySchema.parse(request.body);
 
         const hashedPassword = await bcrypt.hash(password, 8);
 
-        const userHashedPassword = { username, password: hashedPassword };
+        const userHashedPassword = { username, password: hashedPassword, profileId: profileId };
 
         const user = await makeUserUseCase().createHandler(userHashedPassword);
-        response.status(201).send({ id: user?.id, username: user?.username });
+        response.status(201).send({ id: user?.id, username: user?.username, profileId: user?.profileId });
     } catch (error) {
         if (error instanceof z.ZodError) {
             response.status(400).json({ errors: error.errors });

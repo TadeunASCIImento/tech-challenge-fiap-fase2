@@ -10,8 +10,9 @@ export class UserCREATETABLE1718888995683 implements MigrationInterface {
         await queryRunner.query(`
             CREATE TABLE "users"(
                 ID UUID PRIMARY KEY,
-                USER_NAME VARCHAR(200) NOT NULL,
-                PASSWORD VARCHAR(200) NOT NULL
+                USER_NAME VARCHAR(200) UNIQUE NOT NULL,
+                PASSWORD VARCHAR(200) NOT NULL,
+                ID_PROFILE BIGINT NOT NULL
             )
         `)
 
