@@ -8,7 +8,7 @@ export class PostCREATETABLE1718804438529 implements MigrationInterface {
         `)
         
         await queryRunner.query(
-            `CREATE TABLE post(
+            `CREATE TABLE POST(
                 ID UUID PRIMARY KEY,
                 TITLE VARCHAR(200) NOT NULL,
                 DESCRIPTION VARCHAR(5000) NOT NULL
@@ -16,9 +16,23 @@ export class PostCREATETABLE1718804438529 implements MigrationInterface {
         )
 
         await queryRunner.query(`
-            ALTER TABLE post
+            ALTER TABLE POST
             ALTER COLUMN id SET DEFAULT uuid_generate_v4();
         `)
+        
+        await queryRunner.query(
+            `CREATE TABLE USER_PROFILE(
+                ID SERIAL PRIMARY KEY,
+                PROFILE VARCHAR(50) UNIQUE NOT NULL 
+           )`
+        )
+
+        await queryRunner.query(
+            `INSERT INTO user_profile (profile) VALUES ('user_admin');`
+        )
+        await queryRunner.query(
+            `INSERT INTO user_profile (profile) VALUES ('user_common');`
+        )
         
     }
 

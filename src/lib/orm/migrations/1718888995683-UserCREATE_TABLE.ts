@@ -12,7 +12,7 @@ export class UserCREATETABLE1718888995683 implements MigrationInterface {
                 ID UUID PRIMARY KEY,
                 USER_NAME VARCHAR(200) UNIQUE NOT NULL,
                 PASSWORD VARCHAR(200) NOT NULL,
-                ID_PROFILE BIGINT NOT NULL
+                PROFILE_ID BIGINT NOT NULL
             )
         `)
 
