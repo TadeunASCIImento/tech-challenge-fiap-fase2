@@ -3,9 +3,10 @@ import { z } from 'zod';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { makeUserUseCase } from "../../use-cases/factories/user.use.case.factory";
-
 import { env } from "../../env";
+
+import { makeUserUseCase } from "../../use-cases/factories/user.use.case.factory";
+import { hasPermission } from "../../utils/user.authorization.util";
 
 export async function createUser(request: Request, response: Response) {
     try {
@@ -41,15 +42,19 @@ export async function generateToken(request: Request, response: Response) {
         });
 
         const { username, password } = bodySchema.parse(request.body);
-
         const user = await makeUserUseCase().findHandler(username);
-
+        
         if (!user || !bcrypt.compareSync(password, user.password)) {
             return response.status(401).send({ message: 'Invalid credentials' })
         }
+        
+        const userHasPermission = await hasPermission(user);
+        
+        if (!userHasPermission) {
+            return response.status(403).send({ message: 'User no has pemission'})
+        }
 
         const token = jwt.sign({ username }, env.JWT_SECRET, { expiresIn: '1h' });
-
         response.status(201).send({ id: user.id, username, token });
     } catch (error) {
         if (error instanceof z.ZodError) {
