@@ -33,7 +33,6 @@ export async function createUser(request: Request, response: Response) {
 
 }
 
-
 export async function generateToken(request: Request, response: Response) {
     try {
         const bodySchema = z.object({
