@@ -24,7 +24,7 @@ export class User implements IUser {
     password: string;
 
     @Column({
-        name:'id_profile',
+        name:'profile_id',
         type: 'bigint'
     })
     profileId: number;
