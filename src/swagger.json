@@ -1,0 +1,831 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "API Documentation - Tech-challenge-fiap-fase2",
+        "description": "API Documentation with Swagger"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Entre seu bearer token no formato Bearer token"
+        }
+    },
+    "paths": {
+        "/api/user": {
+            "post": {
+                "summary": "Cria um usuário",
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Usuário a ser criado",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "example": "tnascimento"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "your@password"
+                                },
+                                "profileId": {
+                                    "type": "integer",
+                                    "example": 1
+                                }
+                            },
+                            "required": [
+                                "username",
+                                "password",
+                                "profileId"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Usuário criado com sucesso",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "example": "tadeu nascimento"
+                                },
+                                "profileId": {
+                                    "type": "integer",
+                                    "example": 2
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "username"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/authorization": {
+            "post": {
+                "summary": "Gera Token de acesso para o usuário autenticado",
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Usuário administrador autenticado a ser gerado o token de acesso",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "example": "tnascimento"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "user@password"
+                                }
+                            },
+                            "required": [
+                                "username",
+                                "password"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Token gerado com sucesso",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "example": "tnascimento"
+                                },
+                                "token": {
+                                    "type": "string",
+                                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRuYXNjaW1lbnRvIiwiaWF0IjoxNzE5ODY0MTg4LCJleHAiOjE3MTk4Njc3ODh9.qWbUwmtiq7XUPE5F8ViVlV4gucuqRcAU5Y6CgcSgmQs"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "username"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts": {
+            "post": {
+                "summary": "Cria uma nova Postagem",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Postagem a ser criada",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "Documentação de APIs com Swagger"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "description"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Postagem criada com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "Apis com nodejs"
+                                    },
+                                    "received": {
+                                        "type": "object",
+                                        "example": {}
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "title"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "summary": "Busca uma lista de postagens criadas",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Número da página da lista de postagens a ser recuperada",
+                        "required": false,
+                        "type": "integer",
+                        "example": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Quantidade de itens por página na lista a ser recuperada",
+                        "required": false,
+                        "type": "integer",
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Postagens recuperadas com sucesso",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Documentação de APIs com Swagger"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "number",
+                                        "example": 10
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "10"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "page"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected number, received string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/posts/{id}": {
+            "get": {
+                "summary": "Busca uma postagem pelo ID",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID da postagem a ser recuperada",
+                        "required": true,
+                        "type": "string",
+                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Postagem recuperada com sucesso",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "example": "Documentação de APIs com Swagger"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "id"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualiza uma postagem pelo ID",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID da postagem a ser atualizada",
+                        "required": true,
+                        "type": "string",
+                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Postagem a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "Documentação de APIs com Swagger"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "(Atualização) - Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                }
+                            },
+                            "required": [
+                                "title",
+                                "description"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Postagem atualizada com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "id"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Deleta uma postagem pelo ID",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID da postagem a ser deletada",
+                        "required": true,
+                        "type": "string",
+                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Postagem deletada com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "id"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected string, received number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/posts/admin": {
+            "get": {
+                "summary": "Busca uma lista de postagens criadas para adiministração",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Número da página da lista de postagens a ser recuperada",
+                        "required": false,
+                        "type": "integer",
+                        "example": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Quantidade de itens por página na lista a ser recuperada",
+                        "required": false,
+                        "type": "integer",
+                        "example": 10
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Postagens recuperadas com sucesso",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Documentação de APIs com Swagger"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "string",
+                                        "example": "number"
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "string"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "limit"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected number, received string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/posts/search": {
+            "get": {
+                "summary": "Busca postagens por uma palavra chave no título ou conteúdo",
+                "tags": [
+                    "Post"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "keyword",
+                        "description": "Palavra chave para busca da postagem a ser recuperada",
+                        "required": false,
+                        "type": "string",
+                        "example": "Atualizado"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Postagens recuperadas com sucesso",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": "b488a6f6-787c-4c43-b429-81830107e069"
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Documentação de APIs com Swagger"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Com o crescimento no uso das APIs, surge a necessidade de uma documentação clara, objetiva e sucinta. sobre como um serviço deve receber suas requisições."
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "invalid_type"
+                                    },
+                                    "expected": {
+                                        "type": "number",
+                                        "example": 1
+                                    },
+                                    "received": {
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "path": {
+                                        "type": "string",
+                                        "example": "page"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Expected number, received string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
