@@ -27,6 +27,6 @@ export class User implements IUser {
         name:'profile_id',
         type: 'bigint'
     })
-    profileId: number;
+    profileId?: number;
 
 }

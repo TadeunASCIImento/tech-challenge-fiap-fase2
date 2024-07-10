@@ -2,5 +2,5 @@ export interface IUser {
     id?: string;
     username: string;
     password: string;
-    profileId: number;
+    profileId?: number;
 }

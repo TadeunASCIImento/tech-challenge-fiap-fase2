@@ -154,7 +154,7 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Token gerado com sucesso",
                         "schema": {
                             "type": "object",

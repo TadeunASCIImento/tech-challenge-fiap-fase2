@@ -4,8 +4,8 @@ export class UserProfileUseCaseHandler {
 
     constructor(private repository: IUserProfileRepository){}
 
-    async handlerFindProfile(id: number) {
-        return this.repository.findProfileById(id);
+    async handlerFindProfile(username: string) {
+        return this.repository.findProfileByUserName(username);
     }
 
 }

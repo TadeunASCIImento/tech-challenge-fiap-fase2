@@ -7,8 +7,7 @@ export async function validateUserPermission(request: Request, response: Respons
     try {
         const bodySchema = z.object({
             username: z.string(),
-            password: z.string(),
-            profileId: z.coerce.number()
+            password: z.string()
         });
         
     const user = bodySchema.parse(request.body); 
