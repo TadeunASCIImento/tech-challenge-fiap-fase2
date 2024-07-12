@@ -15,7 +15,7 @@ export async function validateUserPermission(request: Request, response: Respons
     const userHasPermission = await hasPermission(user);
         
     if (!userHasPermission) {
-        return response.status(403).send({ message: 'User no has pemission'})
+        return response.status(403).send({ message: 'User no has permission'})
     }
     next();
     } catch (error) {
