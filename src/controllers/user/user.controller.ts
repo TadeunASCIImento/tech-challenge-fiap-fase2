@@ -51,11 +51,11 @@ export async function generateToken(request: Request, response: Response) {
         const userHasPermission = await hasPermission(user);
         
         if (!userHasPermission) {
-            return response.status(403).send({ message: 'User no has pemission'})
+            return response.status(403).send({ message: 'User no has permission'})
         }
 
         const token = jwt.sign({ username }, env.JWT_SECRET, { expiresIn: '1h' });
-        response.status(201).send({ id: user.id, username, token });
+        response.status(200).send({ id: user.id, username, token });
     } catch (error) {
         if (error instanceof z.ZodError) {
             response.status(400).json({ errors: error.errors });
