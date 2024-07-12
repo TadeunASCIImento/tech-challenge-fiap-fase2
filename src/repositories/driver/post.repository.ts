@@ -1,7 +1,7 @@
 import { PaginatedResult } from "../../entities/interfaces/pagination.interface";
 import { IPost } from "../../entities/interfaces/post.interface";
 import { database } from "../../lib/pg/db";
-import { IPostRepository } from "../post.repository.interface";
+import { IPostRepository } from "../interfaces/post.repository.interface";
 
 
 export class PostRepository implements IPostRepository{
